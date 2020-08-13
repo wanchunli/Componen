@@ -1,2 +1,5 @@
 rootProject.name='Componen'
 include ':app'
+include ':base'
+include ':common'
+include ':webview'
