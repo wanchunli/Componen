@@ -29,5 +29,9 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
-    implementation project(path: ':webview')
+//    implementation project(path: ':webview')
+    implementation project(path: ':common')
+    //6.0权限申请
+    api 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
+    api 'io.reactivex:rxjava:1.1.3'
 }

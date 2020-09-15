@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_title_rl"
+    android:layout_width="match_parent"
+    android:layout_height="?android:actionBarSize"
+    android:orientation="vertical">
+    <!-- 首先定义标题栏 -->
+    <RelativeLayout
+        android:id="@+id/app_layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/app_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:text="标题栏标题栏标"
+            android:textColor="#fff"
+            android:textSize="17sp" />
+
+        <RelativeLayout
+            android:id="@+id/app_layout_title_back_iv"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/app_button_back" />
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/app_layout_title_menu_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/app_layout_title_menu_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@id/app_layout_title_menu_iv"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/app_layout_title_menu_two_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="60dp"
+            android:visibility="gone"
+            android:padding="10dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

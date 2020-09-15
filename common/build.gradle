@@ -24,5 +24,7 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
+
     api project(":base")
+
 }
