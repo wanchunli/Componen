@@ -1,10 +1,19 @@
 package com.anso.componen.api;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.anso.base.net.BaseHttpResponse;
+import com.anso.componen.bean.Token;
+import com.anso.componen.bean.UserBean;
 import com.anso.componen.bean.WeatherEntity;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -26,6 +35,9 @@ public interface ApiService {
     @GET("weather_mini")
     Observable<BaseHttpResponse<String>> getWeather(@Query("citykey") String city_code);
 
-//    @GET("weather/city/{city_code}")
-//    Observable<BaseHttpResponse<WeatherEntity>> getWeather(@Path("city_code") String city_code);
+    @POST("auth/jwt/token")
+    Observable<BaseHttpResponse<Token>> login(@Body RequestBody body);
+
+    @GET("auth/user/get")
+    Observable<BaseHttpResponse<UserBean>> getUserInfo();
 }

@@ -8,12 +8,18 @@ package com.anso.componen.api;
  */
 
 import android.util.Log;
+
 import com.anso.base.bean.ErrorBean;
 import com.anso.base.net.BaseHttpResponse;
 import com.anso.base.net.BaseObserverListener;
 import com.anso.base.net.RxSchedulers;
 import com.anso.common.utils.NetUtils;
 import com.anso.componen.AppContext;
+import com.anso.componen.bean.Token;
+import com.anso.componen.bean.UserBean;
+import com.anso.componen.bean.UserConfig;
+import com.anso.componen.constants.SPConstans;
+import com.anso.componen.utils.SafeSpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +30,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.CacheControl;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
@@ -56,6 +68,7 @@ public class RetrofitManager {
      */
     private static RetrofitManager mInstance;
     private static final long DEFAULT_TIMEOUT = 60L;
+    private Retrofit loginRetrofit = null;
     private Retrofit retrofit = null;
     //请求头信息
     private final String HEADER_CONNECTION = "keep-alive";
@@ -71,8 +84,41 @@ public class RetrofitManager {
         return mInstance;
     }
 
+    public Retrofit loginRetrofit() {
+        if (loginRetrofit == null) {
+            synchronized (RetrofitManager.class) {
+                if (loginRetrofit == null) {
+                    OkHttpClient mClient = new OkHttpClient.Builder()
+                            //添加公告查询参数
+//                          .addInterceptor(new CommonQueryParamsInterceptor())
+//                          .addInterceptor(new MutiBaseUrlInterceptor())
+//                          添加离线缓存
+//                          .cache(new Cache(File(context.getExternalFilesDir("okhttpCache"), ""), 14 * 1024 * 100))
+//                          .addInterceptor(new CacheInterceptor())
+//                          .addNetworkInterceptor(new CacheInterceptor())//必须要有，否则会返回504
+//                            .addInterceptor(new HeaderInterceptor())
+                            .addInterceptor(new LoggingInterceptor())//添加请求拦截(可以在此处打印请求信息和响应信息)
+                            .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                            .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                            .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                            .build();
+                    loginRetrofit = new Retrofit.Builder()
+                            .baseUrl(API.BASE_SERVER_IP)//基础URL 建议以 / 结尾
+                            .addConverterFactory(GsonConverterFactory.create())//设置 Json 转换器
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//RxJava 适配器
+                            .client(mClient)
+                            .build();
+                }
+            }
+        }
+        return loginRetrofit;
+    }
+
     public Retrofit getRetrofit() {
         if (retrofit == null) {
+            if (loginRetrofit != null) {
+                loginRetrofit = null;
+            }
             synchronized (RetrofitManager.class) {
                 if (retrofit == null) {
                     OkHttpClient mClient = new OkHttpClient.Builder()
@@ -99,6 +145,10 @@ public class RetrofitManager {
             }
         }
         return retrofit;
+    }
+
+    public ApiService loginRequestService() {
+        return loginRetrofit().create(ApiService.class);
     }
 
     public ApiService getRequestService() {
@@ -130,9 +180,13 @@ public class RetrofitManager {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
+            String token = SafeSpUtils.getString(SPConstans.USER_TOKEN, "");
+            Log.i("token", token);
             Request requestBuilder = request.newBuilder()
                     .addHeader("Connection", HEADER_CONNECTION)
                     .addHeader("User-Agent", userAgent)
+                    .addHeader("TW-App", "android")
+                    .addHeader("TW-Authorization", token)
                     .method(request.method(), request.body())
                     .build();
             return chain.proceed(requestBuilder);
@@ -172,6 +226,7 @@ public class RetrofitManager {
         public Response intercept(Chain chain) throws IOException {
             //这个chain里面包含了request和response，所以你要什么都可以从这里拿
             Request request = chain.request();
+            Log.e("header", request.headers().toString());
             long t1 = System.nanoTime();//请求发起的时间
             String method = request.method();
             JSONObject jsonObject = new JSONObject();
@@ -187,25 +242,31 @@ public class RetrofitManager {
                             }
                         }
                     }
-                    Log.e("request", String.format("发送请求 %s on %s  %nRequestParams:%s%nMethod:%s",
-                            request.url(), chain.connection(), jsonObject.toString(), request.method()));
+                    Log.e("request", String.format("Method:%s 发送请求 %s on %s  %nRequestParams:%s%n",
+                            request.method(), request.url(), chain.connection(), jsonObject.toString()));
                 } else {
                     Buffer buffer = new Buffer();
                     RequestBody requestBody = request.body();
                     if (requestBody != null) {
                         request.body().writeTo(buffer);
                         String body = buffer.readUtf8();
-                        Log.e("request", String.format("发送请求 %s on %s  %nRequestParams:%s%nMethod:%s",
-                                request.url(), chain.connection(), body, request.method()));
+                        Log.e("request", String.format("Method:%s 发送请求 %s on %s  %nRequestParams:%s%n",
+                                request.method(), request.url(), chain.connection(), body));
                     }
                 }
             } else {
-                Log.e("request", String.format("发送请求 %s on %s%nMethod:%s",
-                        request.url(), chain.connection(), request.method()));
+                Log.e("request", String.format("Method:%s 发送请求 %s on %s%n",
+                        request.method(), request.url(), chain.connection()));
             }
             Response response = chain.proceed(request);
             long t2 = System.nanoTime();//收到响应的时间
             ResponseBody responseBody = response.peekBody(1024 * 1024);
+            Log.e("request",
+                    String.format("Retrofit接收响应: %s %n返回json:%s %n耗时：%.1fms",
+                            response.request().url(),
+                            responseBody.string(),
+                            (t2 - t1) / 1e6d
+                    ));
             Log.e("request",
                     String.format("Retrofit接收响应: %s %n返回json:%s %n耗时：%.1fms",
                             response.request().url(),

@@ -10,5 +10,5 @@ package com.anso.componen.api;
 public class API {
     //域名
 //    public static final String BASE_SERVER_IP = "http://t.weather.sojson.com/api/";
-    public static final String BASE_SERVER_IP = "http://wthrcdn.etouch.cn/";
+    public static final String BASE_SERVER_IP = "http:10.0.0.131:8850/api/";
 }

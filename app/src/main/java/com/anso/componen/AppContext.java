@@ -1,6 +1,8 @@
 package com.anso.componen;
 import android.app.Application;
 
+import com.anso.componen.utils.SafeSpUtils;
+
 public class AppContext extends Application {
 
     private static AppContext sInstance;
@@ -15,6 +17,7 @@ public class AppContext extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SafeSpUtils.init(this);
     }
 
 }
