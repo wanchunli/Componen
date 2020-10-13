@@ -28,19 +28,7 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
-
     api 'com.google.android.material:material:1.0.0'
-    //rxandroid
-    api 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    //rxjava
-    api 'io.reactivex.rxjava2:rxjava:2.1.10'
-    //retrofit
-    api "com.squareup.retrofit2:retrofit:2.4.0"
-    //gsonConverter
-    api "com.squareup.retrofit2:converter-gson:2.4.0"
-    //rxjavaAdapter
-    api "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
-    //retrofit log打印
-    api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    api 'com.google.code.gson:gson:2.8.2'
 
 }

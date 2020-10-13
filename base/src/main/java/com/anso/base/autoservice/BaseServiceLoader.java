@@ -5,9 +5,9 @@ import java.util.ServiceLoader;
 /**
  *
  IWebViewService iWebViewService = BaseServiceLoader.load(IWebViewService.class);
-    if (iWebViewService != null) {
-        iWebViewService.startWebViewActivity(MainActivity.this, "https:www.baidu.com", "百度", false);
-    }
+ if (iWebViewService != null) {
+ iWebViewService.startWebViewActivity(MainActivity.this, "https:www.baidu.com", "百度", false);
+ }
  */
 public final class BaseServiceLoader {
     private BaseServiceLoader() {

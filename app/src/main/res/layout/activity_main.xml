@@ -4,86 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--导入类-->
-        <import type="com.anso.componen.bean.WeatherEntity" />
-        <!--因为User已经导入, 所以可以简写类名-->
-        <variable name="weather" type="WeatherEntity" />
-        <variable name="tv_city" type="java.lang.String"/>
         <variable
-            name="activity"
-            type="com.anso.componen.ui.main.MainActivity"/>
-<!--        <variable name="tv_quality" type="java.lang.String"/>-->
-<!--        <variable name="tv_pm" type="java.lang.String"/>-->
-<!--        <variable name="tv_wendu" type="java.lang.String"/>-->
-<!--        <variable name="tv_notice" type="java.lang.String"/>-->
+            name="mainClick"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="orderClick"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="personClick"
+            type="android.view.View.OnClickListener"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:background="@color/colorAccent"
-        android:gravity="center_vertical|left"
-        android:orientation="vertical"
-        android:paddingLeft="50dp">
+        android:background="@color/white">
 
-        <TextView
-            android:id="@+id/tv_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:text="@{tv_city}"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+        <com.anso.base.baseadapter.CustomViewPager
+            android:id="@+id/main_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/view">
 
-        <TextView
-            android:id="@+id/tv_quality"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:text="@{weather.quality}"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
+        </com.anso.base.baseadapter.CustomViewPager>
 
-        <TextView
-            android:id="@+id/tv_pm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:text="@{weather.pm10}"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_above="@+id/main_menu"
+            android:background="#CCCCCC" />
 
-        <TextView
-            android:id="@+id/tv_wendu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:text="@{weather.wendu}"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
+        <LinearLayout
+            android:id="@+id/main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_notice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:text="@{weather.ganmao}"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
+            <RelativeLayout
+                android:id="@+id/home_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{mainClick}"
+                android:background="@drawable/common_touch_bg">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="请求天气数据"
-            android:textColor="@color/colorPrimaryDark"
-            android:onClick="@{()->activity.getData()}"
-            android:textSize="16sp" />
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/app_label_home" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="2dp"
+                    android:text="主页"
+                    android:textColor="@drawable/main_tab_selector_text"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/order_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{orderClick}"
+                android:background="@drawable/common_touch_bg">
+
+                <ImageView
+                    android:id="@+id/order_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/app_label_order" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="2dp"
+                    android:text="工单"
+                    android:textColor="@drawable/main_tab_selector_text"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/person_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{personClick}"
+                android:background="@drawable/common_touch_bg">
+
+                <ImageView
+                    android:id="@+id/person_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/app_label_personal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="2dp"
+                    android:text="我的"
+                    android:textColor="@drawable/main_tab_selector_text"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
 </layout>

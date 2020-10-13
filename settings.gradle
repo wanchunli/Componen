@@ -1,3 +1,4 @@
+include ':network'
 rootProject.name='Componen'
 include ':app'
 include ':base'

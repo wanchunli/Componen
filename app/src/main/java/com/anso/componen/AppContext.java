@@ -1,7 +1,9 @@
 package com.anso.componen;
 import android.app.Application;
 
+import com.anso.base.preference.PreferencesUtil;
 import com.anso.componen.utils.SafeSpUtils;
+import com.xiangxue.network.base.NetworkApi;
 
 public class AppContext extends Application {
 
@@ -18,6 +20,8 @@ public class AppContext extends Application {
     public void onCreate() {
         super.onCreate();
         SafeSpUtils.init(this);
+        NetworkApi.init(new NetworkRequestInfo(this));
+        PreferencesUtil.init(this);
     }
 
 }

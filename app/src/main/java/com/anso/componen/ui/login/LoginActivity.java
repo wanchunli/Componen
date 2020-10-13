@@ -60,8 +60,8 @@ public class LoginActivity extends MVPBaseActivity<LoginView, LoginPresenter> im
                     public void call(Boolean aBoolean) {
                         if (aBoolean) {//true表示获取权限成功（注意这里在android6.0以下默认为true）
 //                            mPresenter.login();
-//                            mPresenter.chain();
-                            mPresenter.demo();
+                            mPresenter.chain();
+//                            mPresenter.demo();
                         } else {
                             PermissionPageUtils permissionPageUtils = new PermissionPageUtils(LoginActivity.this, "com.anso.xinyu_outworkplatform");
                             permissionPageUtils.jumpPermissionPage();

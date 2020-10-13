@@ -1,11 +1,374 @@
 <resources>
+    <!-- 对话框样式 -->
+    <style name="dialog" parent="@android:style/Theme.Dialog">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 模糊 -->
+    </style>
+
+    <declare-styleable name="ClearEditText">
+        <attr name="delete_image" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="DropDownMenu">
+        <attr name="ddunderlineColor" format="color" />
+        <attr name="dddividerColor" format="color" />
+        <attr name="ddtextSelectedColor" format="color" />
+        <attr name="ddtextUnselectedColor" format="color" />
+        <attr name="ddmenuBackgroundColor" format="color" />
+        <attr name="ddmaskColor" format="color" />
+        <attr name="ddmenuTextSize" format="dimension" />
+        <attr name="ddmenuSelectedIcon" format="reference" />
+        <attr name="ddmenuUnselectedIcon" format="reference" />
+        <attr name="ddmenuMenuHeightPercent" format="float" />
+        <!--新增筛选menu-->
+        <attr name="ddmenuIsScreen" format="boolean" />
+        <attr name="ddmenuScreenIcon" format="reference" />
+        <attr name="ddmenuScreenText" format="string" />
+    </declare-styleable>
+
+    <style name="TipDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- 对话框外层布局属性 -->
+    <style name="common_dialog_root_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/common_dialog_bg_with_rounded_rectangle</item>
+    </style>
+
+    <!-- 对话框外层背景布局属性 -->
+    <style name="common_dialog_root_bg_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/common_dialog_bg</item>
+    </style>
+
+    <!-- 对话框取消大号按钮样式，左下角，右下角有圆角 -->
+    <style name="common_dialog_cancel_large_btn_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_dialog_btn_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/common_dialog_btn_textSize</item>
+        <item name="android:textColor">@color/common_dialog_text_light_black</item>
+        <item name="android:background">@drawable/common_dialog_cancel_large_btn_selector</item>
+    </style>
+
+    <!-- 对话框取消小号按钮样式，左下角有圆角 -->
+    <style name="common_dialog_cancel_small_btn_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/common_dialog_btn_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/common_dialog_btn_textSize</item>
+        <item name="android:textColor">@color/material_blue_grey_80</item>
+        <!--<item name="android:background">@drawable/button_no</item>-->
+    </style>
+
+    <!-- 对话框确定大号按钮样式，左下角，右下角有圆角 -->
+    <style name="common_dialog_ok_large_btn_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_dialog_btn_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/common_dialog_btn_textSize</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:background">@drawable/button_yes</item>
+    </style>
+
+    <!-- 对话框确定大号按钮样式，左下角，右下角有圆角，背景白色字体黑色 -->
+    <style name="common_dialog_ok_large_btn_style_white">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_dialog_btn_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/common_dialog_btn_textSize</item>
+        <item name="android:textColor">@color/common_dialog_text_light_black</item>
+        <item name="android:background">@drawable/common_dialog_ok_large_btn_white_selector</item>
+    </style>
+
+    <!-- 对话框确定小号按钮样式，右下角有圆角 -->
+    <style name="common_dialog_ok_small_btn_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/common_dialog_btn_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/common_dialog_btn_textSize</item>
+        <item name="android:textColor">@color/common_dialog_title_bg_safe_blue</item>
+        <item name="android:background">@drawable/common_dialog_ok_small_btn_blue_selector</item>
+    </style>
+
+    <!-- 对话框确定小号按钮样式，右下角有圆角，背景白色字体黑色 -->
+    <style name="common_dialog_ok_small_btn_style_white_bg">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/common_dialog_btn_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/common_dialog_btn_textSize</item>
+        <item name="android:textColor">@color/common_dialog_text_blue</item>
+        <item name="android:background">@drawable/common_dialog_ok_small_btn_white_selector</item>
+    </style>
+
+    <!-- 对话框标题正常黑文本样式 -->
+    <style name="common_dialog_title_normal_black_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">@dimen/common_dialog_left_right_space</item>
+        <item name="android:layout_marginRight">@dimen/common_dialog_left_right_space</item>
+        <item name="android:layout_marginTop">@dimen/common_dialog_title_top_space</item>
+        <item name="android:textSize">@dimen/common_dialog_title_textSize</item>
+        <item name="android:textColor">@color/common_dialog_text_normal_black</item>
+    </style>
+
+    <!-- 对话框带背景的标题正常白文本样式 -->
+    <style name="common_dialog_title_normal_white_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_dialog_title_textSize</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- 对话框标题警示危险文本样式 -->
+    <style name="common_dialog_title_danger_red_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/common_dialog_left_right_space</item>
+        <item name="android:layout_marginRight">@dimen/common_dialog_left_right_space</item>
+        <item name="android:textSize">@dimen/common_dialog_title_textSize</item>
+        <item name="android:textColor">@color/common_dialog_text_danger_red</item>
+    </style>
+
+    <!-- 对话框带背景的标题的logo样式 -->
+    <style name="common_dialog_title_logo_style">
+        <item name="android:layout_width">@dimen/common_dialog_title_logo_width</item>
+        <item name="android:layout_height">@dimen/common_dialog_title_logo_width</item>
+        <item name="android:layout_marginRight">@dimen/common_dialog_title_logo_right_space</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:background">@drawable/common_dialog_title_logo</item>
+    </style>
+
+    <!-- 对话框内容布局容器样式 -->
+    <style name="common_dialog_content_container_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/common_dialog_left_right_space</item>
+        <item name="android:layout_marginRight">@dimen/common_dialog_left_right_space</item>
+    </style>
+
+    <!-- 对话框内容区域文本样式 -->
+    <style name="common_dialog_content_light_black_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/common_dialog_left_right_space</item>
+        <item name="android:layout_marginLeft">@dimen/common_dialog_left_right_space</item>
+        <item name="android:layout_marginRight">@dimen/common_dialog_left_right_space</item>
+        <item name="android:layout_marginBottom">@dimen/common_dialog_content_bottom_space</item>
+        <item name="android:textSize">@dimen/common_dialog_content_textSize</item>
+        <item name="android:textColor">@color/common_dialog_text_light_black</item>
+    </style>
+
+    <!-- 对话框确定取消按钮顶部分割线样式 -->
+    <style name="common_dialog_btn_top_divider_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_dialog_btn_top_divider_height</item>
+        <item name="android:background">@color/common_dialog_btn_top_divider_color</item>
+    </style>
+
+    <!-- 对话框标题背景下面投影分割线样式 -->
+    <style name="common_dialog_title_bottom_shadow_divider_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_dialog_title_bottom_shadow_divider_height
+        </item>
+        <item name="android:background">@color/common_dialog_title_bottom_shadow_divider_color
+        </item>
+    </style>
+
+    <!-- 对话框确定取消按钮中间分割线样式 -->
+    <style name="common_dialog_btn_vertical_divider_style">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:background">@color/common_dialog_btn_top_divider_color</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- 自定义仿IOS的ActionSheet底部Dialog的样式 ，有模糊效果 -->
+   <!-- <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+
+        &lt;!&ndash; 背景透明 &ndash;&gt;
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        &lt;!&ndash; 浮于Activity之上 &ndash;&gt;
+        <item name="android:windowIsFloating">true</item>
+        &lt;!&ndash; 边框 &ndash;&gt;
+        <item name="android:windowFrame">@null</item>
+        &lt;!&ndash; Dialog以外的区域模糊效果 &ndash;&gt;
+        <item name="android:backgroundDimEnabled">true</item>
+        &lt;!&ndash; 无标题 &ndash;&gt;
+        <item name="android:windowNoTitle">true</item>
+        &lt;!&ndash; 半透明 &ndash;&gt;
+        <item name="android:windowIsTranslucent">true</item>
+        &lt;!&ndash; Dialog进入及退出动画 &ndash;&gt;
+        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
+    </style>-->
+
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+<!--日期选择器样式-->
+    <style name="time_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/common_white</item>
+    </style>
+    <style name="NobackDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/common_transparent</item>
+    </style>
+
+    <style name="NoTitleTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+        <!--指纹模块-->
+    <style name="petgirls_dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+    <!--视频播放控件-->
+    <style name="jz_style_dialog_progress" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/jz_popup_toast_anim</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="jz_popup_toast_anim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <declare-styleable name="RoundRectImageView">
+        <attr name="roundDp" format="dimension" />
+    </declare-styleable>
+
+    <style name="alert_dialog" parent="android:Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@color/float_transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+
+    <style name="alert_work_dialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <!--是否去除标题 -->
+        <item name="windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 背景透明 -->
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 没有windowActionBar-->
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="dialog_blue_button" parent="android:Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">31dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">21dp</item>
+        <item name="android:background">@color/sweet_dialog_bg_color</item>
+        <item name="android:paddingRight">21dp</item>
+        <item name="android:textColor">@color/button_text_color</item>
+    </style>
+
+    <style name="UpdateAppNumberProgressBar_Red">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+        <item name="progress_max">100</item>
+        <item name="progress_current">0</item>
+
+        <item name="progress_unreached_color">#CCCCCC</item>
+        <item name="progress_reached_color">#5FA0F7</item>
+
+        <item name="progress_text_size">12sp</item>
+        <item name="progress_text_color">#5FA0F7</item>
+
+        <item name="progress_reached_bar_height">4dp</item>
+        <item name="progress_unreached_bar_height">3dp</item>
+    </style>
+
+    <style name="UpdateAppDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowEnterAnimation">@anim/update_app_window_in</item>
+        <item name="android:windowExitAnimation">@anim/update_app_window_out</item>
+    </style>
+
+
+    <!-- 自定义仿IOS的ActionSheet底部Dialog的样式 ，有模糊效果 -->
+    <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
     </style>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.anso.base.basemvp;
 
-import com.anso.base.net.RxManager;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -15,7 +14,6 @@ import java.lang.ref.WeakReference;
 public abstract class BasePresenter<V> {
 
     protected Reference<V> mViewRef;
-    public RxManager rxManager = new RxManager();
 
     public void attachView(V view) {
         mViewRef = new WeakReference<V>(view);
@@ -33,8 +31,6 @@ public abstract class BasePresenter<V> {
         if (mViewRef != null) {
             mViewRef.clear();
             mViewRef = null;
-            rxManager.clear();
-            rxManager = null;
         }
     }
 

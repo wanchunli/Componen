@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#85B0F9</color>
+    <color name="colorPrimaryDark">#6EA1FA</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="common_transparent">#00000000</color>
+    <color name="white">#fff</color>
+    <color name="full_transparent">#00ffffff</color>
+
+    <!-- common dialog -->
+    <color name="common_dialog_text_normal_black">#ff535353</color>
+    <color name="common_dialog_text_light_black">#ff959595</color>
+    <color name="common_dialog_text_danger_red">#ffe4363a</color>
+    <color name="common_dialog_text_blue">#FD9B01</color>
+    <color name="common_dialog_btn_normal_bg_blue">#349BE6</color>
+    <color name="common_dialog_btn_press_bg_color1">#dcdbdb</color>
+    <color name="common_dialog_btn_press_bg_color2">#349BE6</color>
+    <color name="common_dialog_title_bg_safe_blue">#349BE6</color>
+    <color name="common_dialog_title_bg_risk_yellow">#fffe8213</color>
+    <color name="common_dialog_title_bg_danger_red">#ffff543d</color>
+    <color name="common_dialog_btn_top_divider_color">#ffe5e5e5</color>
+    <color name="common_dialog_title_bottom_shadow_divider_color">#0c000000</color>
+    <color name="normalfontcolor">#999999</color>
+    <!--指纹模块-->
+    <color name="color_FB544B">#FB544B</color>
+    <color name="color_0076FF">#0076FF</color>
+    <!--日期选择器-->
+    <color name="background">#FFFFFF</color>
+    <color name="split_line">#11112233</color>
+    <color name="text1">#59B29C</color>
+    <color name="text2">#333333</color>
+
+    <color name="common_white">#FFFFFF</color>
+    <color name="color1">#F0F0F0</color>
+    <color name="color2">#FFFFFF</color>
+    <color name="color3">#B0B0B0</color>
+    <color name="color4">#666666</color>
+    <color name="color5">#57C5E8</color>
+
+    <!--zxxing-->
+    <!-- QR_Code -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_image_border">#ffffffff</color>
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c000ff00</color>
+    <color name="system_bar_color">#fed952</color>
+
+    <color name="touchlightgrey">#DBDBDB</color> <!-- 淡灰色 -->
+
+    <!--sweetdialog颜色-->
+    <color name="float_transparent">#00000000</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="red_btn_bg_color">#DD6B55</color>
+    <color name="red_btn_bg_pressed_color">#CD5B55</color>
+    <color name="error_stroke_color">#F27474</color>
+    <color name="success_stroke_color">#A5DC86</color>
+    <color name="trans_success_stroke_color">#33A5DC86</color>
+    <color name="warning_stroke_color">#F8BB86</color>
+    <color name="text_color">#575757</color>
+    <color name="material_blue_grey_80">#ff37474f</color>
+    <color name="material_blue_grey_90">#ff263238</color>
+    <color name="material_blue_grey_95">#ff21272b</color>
+    <color name="material_deep_teal_20">#ff80cbc4</color>
+    <color name="material_deep_teal_50">#ff009688</color>
+
+    <color name="color_track">#FDB302</color>
+    <color name="color_line">#7F000000</color>
+    <color name="common_line_grey">#EEEEEE</color>
+    <color name="common_bg_grey">#F3F3F3</color>
+
+    <color name="z_star_color">#79ABF8</color>
+    <color name="scan_corner_color">#0effc2</color>
+    <color name="drop_line_color">#E5E5E5</color>
+    <color name="mask_color">#88888888</color>
 </resources>
