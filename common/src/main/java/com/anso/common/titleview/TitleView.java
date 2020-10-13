@@ -8,6 +8,7 @@ import com.anso.base.customview.BaseCustomView;
 import com.anso.common.R;
 import com.anso.common.autoservice.IWebViewService;
 import com.anso.common.databinding.TitleViewBinding;
+import com.anso.webview.WebViewActivity;
 
 public class TitleView extends BaseCustomView<TitleViewBinding, TitleViewModel> {
     public TitleView(Context context) {
@@ -21,10 +22,11 @@ public class TitleView extends BaseCustomView<TitleViewBinding, TitleViewModel> 
 
     @Override
     public void onRootClicked(View view) {
-        IWebViewService iWebViewService = BaseServiceLoader.load(IWebViewService.class);
-        if (iWebViewService != null) {
-            iWebViewService.startWebViewActivity(getContext(), data.jumpUri, "News", false);
-        }
+        WebViewActivity.startCommonWeb(getContext(), "News", data.jumpUri);
+//        IWebViewService iWebViewService = BaseServiceLoader.load(IWebViewService.class);
+//        if (iWebViewService != null) {
+//            iWebViewService.startWebViewActivity(getContext(), data.jumpUri, "News", false);
+//        }
     }
 
     @Override

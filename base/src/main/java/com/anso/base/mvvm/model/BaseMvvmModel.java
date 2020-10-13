@@ -1,7 +1,6 @@
 package com.anso.base.mvvm.model;
 
 import com.anso.base.preference.BasicDataPreferenceUtil;
-import com.anso.base.utils.NetUtils;
 import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
